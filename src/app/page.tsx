@@ -11,8 +11,8 @@ export default  function Home() {
   // const users = await trpc.Query.hello.query({ name: "R" });
   // console.log(users);
   return (
-    <main className={styles.main}>
-      <CheckBoxInput label="testing" possible={true} />
+    <main >
+      <CheckBoxInput label="testing" possible={true} width={"500px"} height={"45px"} id="dfg"/>
     </main>
   );
 };
