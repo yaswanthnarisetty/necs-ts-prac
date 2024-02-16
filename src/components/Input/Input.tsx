@@ -6,6 +6,18 @@ type InputProps = {
   label: string;
 };
 
+type propType ={
+  theme:{
+    colors:{
+      input:{
+        background?:string,
+        border?:string,
+        placeholder?:string
+      }
+    }
+  }
+}
+
 const labelStyles = (theme: Theme) =>
   css({
     color: theme.colors.input.label, // Use the theme object to access the primary color
@@ -19,12 +31,12 @@ const InputWrapper = styled.div`
 const InputField = styled.input`
   padding: 8px 16px;
   font-size: 16px;
-  background-color: ${(props) => props.theme.colors?.input.background};
+  background-color: ${(props:propType) => props.theme.colors?.input.background};
   color: white;
-  border: ${(props) => props.theme.colors?.input.border};
+  border: ${(props:propType) => props.theme.colors?.input.border};
   border-radius: 5px;
-  cursor: pointer;
-  placeholder: ${(props) => props.theme.colors?.input.placeholder};
+  cursor: pointer; 
+  placeholder: ${(props:propType) => props.theme.colors?.input.placeholder};
   &:hover {
     background-color: #0056b3;
   }
