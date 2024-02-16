@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import Box from "@/components/Atoms/Box";
 import MainLayout from "@/components/Layout/MainLayout";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
@@ -24,16 +23,16 @@ export default function Home() {
   const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
 
   type sideBarItemProp = {
-    name: string,
-    icon: ReactElement,
-    active: boolean
-  }
+    name: string;
+    icon: ReactElement;
+    active: boolean;
+  };
 
   const [sideBarItems, setSideBarItems] = useState<sideBarItemProp[]>([
     {
       name: "All",
       icon: <ClipboardCheck size={16} color="#000" />,
-      active: true
+      active: true,
     },
     {
       name: "Starred",
@@ -119,15 +118,19 @@ export default function Home() {
   }, [data, loading, error])
 
   return (
-
     <main>
       <MainLayout>
-
         {/* <CheckBoxInput label="testing" possible={true} />
         <InputButton />
         {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)} */}
-        <Box style={{ display: "grid", gridTemplateColumns: "30% 70%", gap: "30px", margin: "10px 5%" }}>
-
+        <Box
+          style={{
+            display: "grid",
+            gridTemplateColumns: "30% 70%",
+            gap: "30px",
+            margin: "10px 5%",
+          }}
+        >
           <SideBar title={"Filters"} height={"300px"}>
             <Box display="flex" justifyContent="flex-start" flexDirection="column" gap="15px" >
               {sideBarItems.map((item: sideBarItemProp, index: number) => <SideBarItem key={index} active={item.active} itemName={item.name} itemIcon={item.icon} />)}
@@ -151,8 +154,6 @@ export default function Home() {
 
           </SideBar>
         </Box>
-
-
       </MainLayout>
     </main>
   );
