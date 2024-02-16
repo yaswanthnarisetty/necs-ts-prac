@@ -10,7 +10,6 @@ type MainLayoutProps = {
 
 const MainLayout: React.FC<MainLayoutProps> = (props) => {
 
-
   const BackgroundContainer = styled.div`
     height:100vh;
     min-width: 300px;

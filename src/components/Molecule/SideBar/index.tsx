@@ -5,10 +5,10 @@ import Box from "@/components/Atoms/Box";
 
 type SideBarProps = {
   title: string;
-  width: string;
+  width?: string;
   height: string;
   children?: React.ReactNode;
-  borderRadius?: string;
+  borderRadius?: number;
 };
 
 const SideBar: React.FC<SideBarProps> = ({
@@ -21,14 +21,22 @@ const SideBar: React.FC<SideBarProps> = ({
   <Box
     width={width}
     height={height}
-    borderradius={borderRadius}
-    backgroundcolor="#cfc8c8"
+    borderRadius={borderRadius || 30}
+    backgroundColor="#d3d0d6"
     padding="40px"
+    display="flex"
+    justifyContent="flex-start"
+    alignItems="center"
+    flexDirection="column"
+    gap='30px'
   >
     <Text fontSize="30px" color="white" padding="20px" fontWeight="bold">
       {title}
     </Text>
-    {children}
+    <Box >
+
+      {children}
+    </Box>
   </Box>
 );
 
