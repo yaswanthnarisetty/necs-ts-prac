@@ -1,8 +1,10 @@
 
 "use client"
+import Box from "@/components/Atoms/Box";
 import MainLayout from "@/components/Layout/MainLayout";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
 import InputButton from "@/components/Molecule/InputButton";
+import SideBar from "@/components/Molecule/SideBar";
 import SideBarItem from "@/components/Molecule/SideBarItem";
 import { ClipboardCheck, Star } from 'lucide-react';
 import { ReactElement } from "react";
@@ -34,10 +36,21 @@ export default function Home() {
 
     <main>
       <MainLayout>
-        
-        <CheckBoxInput label="testing" possible={true} width="300px" height="40px"/>
+
+        {/* <CheckBoxInput label="testing" possible={true} />
         <InputButton />
-        {sideBarItems.map((item: sideBarItemProp,index:number) => <SideBarItem key={index}  active={item.active} itemName={item.name} itemIcon={item.icon} />)}
+        {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)} */}
+        <Box style={{ display: "grid", gridTemplateColumns: "25% 75%", gap: "20px" }}>
+
+          <SideBar title={"Filters"}  height={"300px"} >
+            sxrdctfyguhnijm,k
+          </SideBar>
+          <SideBar title={"Filters"}  height={"300px"}>
+            sxrdctfyguhnijm,k
+          </SideBar>
+        </Box>
+
+
       </MainLayout>
     </main>
   );
