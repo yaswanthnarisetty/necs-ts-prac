@@ -1,4 +1,5 @@
 "use client"
+import MainLayout from "@/components/Layout/MainLayout";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
 import InputButton from "@/components/Molecule/InputButton";
 import SideBarItem from "@/components/Molecule/SideBarItem";
@@ -31,10 +32,12 @@ export default function Home() {
   return (
 
     <main>
-      <CheckBoxInput label="testing" possible={true} />
-      <InputButton />
-      {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)}
-
+      <MainLayout>
+        
+        <CheckBoxInput label="testing" possible={true} />
+        <InputButton />
+        {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)}
+      </MainLayout>
     </main>
   );
 };

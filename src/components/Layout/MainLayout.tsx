@@ -1,56 +1,42 @@
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
 import styled from '@emotion/styled';
-import Text from '../Atoms/Text';
-
-type MainLayoutProps={
-    background?:string
+import Box from '../Atoms/Box';
+type MainLayoutProps = {
+  background?: string,
+  children: ReactNode
 }
 
 
- const MainLayout:React.FC<MainLayoutProps>=(props)=> {
+const MainLayout: React.FC<MainLayoutProps> = (props) => {
 
 
-    const BackgroundContainer = styled.div`
+  const BackgroundContainer = styled.div`
     height:100vh;
-  
     min-width: 300px;
-    padding:10px;
-    background:${(props:MainLayoutProps) =>props.background||"#2f2e36"};
+    background: rgb(237,255,245);
+    background: linear-gradient(47deg, rgba(237,255,245,1) 0%, rgba(255,255,255,1) 50%, rgba(238,228,247,1) 100%);
     border-radius:10px;
-    
-    
     `;
 
-const ChildContainer=styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin:auto;
-    max-width:90%
-    `;
-const StyledText=styled.h1`
+
+  const StyledText = styled.h1`
 font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   font-size: 2.5rem;
   letter-spacing: 0.6rem;
   margin: 0;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, #e781fb 40%, #8e76fa 60%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color:#7b61da
 `
 
 
   return (
     <BackgroundContainer>
-        {/* <StyledText fontSize='25px'   mt='40px' mb='40px' ml="50px" >todo</StyledText> */}
-        <StyledText>todo</StyledText>
-        <ChildContainer>
-            {props.children}
-
-        </ChildContainer>
-    </BackgroundContainer>
+      <Box padding='50px 100px'>
+        <StyledText ><span style={{ color: '#000' }}>to</span>do.</StyledText>
+        {props.children}
+      </Box>
+    </BackgroundContainer >
   )
 }
 
