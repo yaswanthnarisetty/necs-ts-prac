@@ -7,11 +7,12 @@ import InputButton from "@/components/Molecule/InputButton";
 import SideBar from "@/components/Molecule/SideBar";
 import SideBarItem from "@/components/Molecule/SideBarItem";
 import { ClipboardCheck, Star } from 'lucide-react';
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 export default function Home() {
   // const users = await trpc.Query.hello.query({ name: "R" });
   // console.log(users);
+  const [selectedpage,setSelectedpage]=useState<string>("ALL")
 
   type sideBarItemProp = {
     name: string,
@@ -45,8 +46,11 @@ export default function Home() {
           <SideBar title={"Filters"}  height={"300px"} >
             
           </SideBar>
-          <SideBar title={"Filters"}  height={"300px"}>
-            
+          <SideBar title={selectedpage=="ALL"?"Tasks":"Starred"}  height={"300px"}>
+            {selectedpage =="ALL" ?<Box>
+              {}
+            </Box>:<></>}
+
           </SideBar>
         </Box>
 
