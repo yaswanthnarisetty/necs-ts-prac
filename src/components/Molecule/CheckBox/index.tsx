@@ -56,10 +56,10 @@ const CheckBoxInput : React.FC<CustomCheckboxProps>=({ label,
 return(
     <Box>
         <CheckboxContainer
-        width={width} 
-    height={height}
-    padding={padding}
-    margin={margin}>
+      width={width}
+      height={height}
+      padding={padding}
+      margin={margin}  possible={false}>
             <StyledCheckbox 
              possible={possible}
              id={inputId}
