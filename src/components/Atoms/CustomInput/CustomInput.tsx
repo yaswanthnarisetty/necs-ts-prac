@@ -17,8 +17,7 @@ const CustomInput = styled.input<CustomInputProps>`
   color: black;
   border: ${(props:CustomInputProps) => props.border || "1px solid black"};
   border-radius: ${(props:CustomInputProps) => props.borderRadius || "2px"};
-  width:${(props:CustomInputProps) => props.width || "10px 20px"};
-  cursor: pointer;
+  width:${(props:CustomInputProps) => props.width || "10px 20px"}
   margin:${(props:CustomInputProps) => props.margin || "10px 10px"};
 
   &:hover {
@@ -27,7 +26,7 @@ const CustomInput = styled.input<CustomInputProps>`
 
   &:focus {
     outline: none;
-    border-color: red; /* Example: Change border color on focus */
+    border-color: rgb(145, 114, 247); /* Example: Change border color on focus */
   }
 `;
 
