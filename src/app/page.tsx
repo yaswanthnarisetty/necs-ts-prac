@@ -1,9 +1,24 @@
+"use client"
+import Image from "next/image";
+import styles from "./page.module.css";
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { trpc } from "@/utils/_trpc";
+import CheckBoxInput from "@/components/Molecule/CheckBox";
+import InputButton from "@/components/Molecule/InputButton";
 import Text from "@/components/Atoms/Text";
-import React from "react";
 
-const MyComponent = () => {
+export default function Home() {
+  // const users = await trpc.Query.hello.query({ name: "R" });
+  // console.log(users);
   return (
-    <div >
+   
+    <main>
+      <CheckBoxInput label="testing" possible={true} />
+      <InputButton />
+      <div >
       <Text
         color="blue"
         fontSize="16px"
@@ -22,7 +37,6 @@ const MyComponent = () => {
         Hello, World!
       </Text>
     </div>
+    </main>
   );
 };
-
-export default MyComponent;
