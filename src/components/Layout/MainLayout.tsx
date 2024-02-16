@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import styled from '@emotion/styled';
 import Text from '../Atoms/Text';
 
 type MainLayoutProps={
-    background?:string
+    background?:string,
+    childern?:ReactNode,
 }
 
 
@@ -47,7 +48,7 @@ font-family: 'Roboto Condensed', sans-serif;
         {/* <StyledText fontSize='25px'   mt='40px' mb='40px' ml="50px" >todo</StyledText> */}
         <StyledText>todo</StyledText>
         <ChildContainer>
-            {props.children}
+            {props?.childern}
 
         </ChildContainer>
     </BackgroundContainer>

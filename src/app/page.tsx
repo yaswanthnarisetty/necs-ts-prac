@@ -41,28 +41,8 @@ export default function Home() {
   ]
 
   return (
-    <main>
-      <SideBar
-        title="Your Sidebar Title"
-        width="300px"
-        height="400px"
-        borderRadius="20px"
-      >
-        <Text
-        color="white"
-        fontSize="16px"
-        fontWeight="bold"
-        mt="60px"
-      >
-        Hello, World!
-      </Text>
-      </SideBar>
-
-   
-      <CheckBoxInput label="testing" possible={true} />
-      <InputButton />
-      {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)}
-
+    <main >
+      <CheckBoxInput label="testing" possible={true} width={"500px"} height={"45px"} id="dfg" completed={true}/>
     </main>
   );
 }
