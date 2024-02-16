@@ -19,6 +19,7 @@ export type TextProps = {
   paddingBottom?: string;
   paddingLeft?: string;
   fontFamily?: string;
+  backgroundcolor?: string;
 };
 
 const Text = styled.p<TextProps>((props) => ({
@@ -37,6 +38,7 @@ const Text = styled.p<TextProps>((props) => ({
   paddingBottom: props.paddingBottom || "0",
   paddingLeft: props.paddingLeft || "0",
   fontFamily: props.fontFamily || "",
+  backgroundColor: props.backgroundcolor || ""
 }));
 
 export default Text;
