@@ -1,3 +1,4 @@
+
 "use client"
 import MainLayout from "@/components/Layout/MainLayout";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
@@ -40,4 +41,4 @@ export default function Home() {
       </MainLayout>
     </main>
   );
-};
+}
