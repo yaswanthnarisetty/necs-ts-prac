@@ -12,6 +12,7 @@ import { FormEvent, ReactElement, useState } from "react";
 export default function Home() {
   // const users = await trpc.Query.hello.query({ name: "R" });
   // console.log(users);
+  const [selectedpage, setSelectedpage] = useState<string>("ALL")
 
   type sideBarItemProp = {
     name: string,
@@ -69,10 +70,11 @@ export default function Home() {
               {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)}
             </Box>
           </SideBar>
-          <SideBar title={"Tasks"} height={"300px"}>
-            <Box width="100%">
-              <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
-            </Box>
+          <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
+            {selectedpage == "ALL" ? <Box>
+              { }
+            </Box> : <></>}
+
           </SideBar>
         </Box>
 
