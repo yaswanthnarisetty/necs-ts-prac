@@ -14,6 +14,7 @@ type CustomCheckboxProps = {
     padding?:number;
     margin?:string;
     id?:string;
+    completed?:boolean;
 };
 
 const CheckboxContainer = styled.div<CustomCheckboxProps>`
@@ -29,10 +30,11 @@ const CheckboxContainer = styled.div<CustomCheckboxProps>`
   background-color:#2f2e36;
   border-radius:10px;
 `;
-const Label = styled.label`
+const Label = styled.label<CustomCheckboxProps>`
  font-size:18px;
  font-weight:400px;
  color:white;
+ text-decoration: ${(props:CustomCheckboxProps) => (props.completed ? "line-through" : "none")};
 
 `;
 
@@ -56,6 +58,7 @@ const CheckBoxInput : React.FC<CustomCheckboxProps>=({ label,
     padding,
     margin,
     id,
+    completed,
     onChange }: CustomCheckboxProps) =>{
         const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, '-')}`;
 return(
@@ -73,7 +76,7 @@ return(
              name={name}
              onChange={onChange}
              disabled={!possible} />
-            <Label htmlFor={inputId}>{label}</Label>
+            <Label htmlFor={inputId} completed={completed}>{label}</Label>
             </Box>
             {id?<Star fill='yellow' color='#2f2e36' />:<Star color="#eef6f5" />
 }
