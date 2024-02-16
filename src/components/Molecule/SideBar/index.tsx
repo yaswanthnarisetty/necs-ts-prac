@@ -20,7 +20,7 @@ const SideBar: React.FC<SideBarProps> = ({
 }) => (
   <Box
     width={width}
-    height='400px'
+    height="400px"
     borderRadius={borderRadius || 30}
     backgroundColor="#fff"
     padding="40px"
@@ -28,14 +28,13 @@ const SideBar: React.FC<SideBarProps> = ({
     justifyContent="flex-start"
     alignItems="flex-start"
     flexDirection="column"
-    gap='30px'
-    style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
+    gap="30px"
+    style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
   >
     <Text fontSize="28px" color="#7b61da" padding="20px" fontWeight="bold">
       {title}
     </Text>
-    <Box >
-
+    <Box width="100%" style={{ marginRight: "100px" }}>
       {children}
     </Box>
   </Box>
