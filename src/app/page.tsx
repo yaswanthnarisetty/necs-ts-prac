@@ -25,6 +25,8 @@ export default function Home() {
   const [selectedpage, setSelectedpage] = useState<string>("ALL")
   const [allTodoData, setAllTodoData] = useState<TodoData[]>([]);
   const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
+  const [updateConfirmed, respupdateConfirmed ] = useLazyQuery(serverFetch)
+
 
   type sideBarItemProp = {
     name: string,
@@ -101,6 +103,35 @@ export default function Home() {
     }
   }, [data, loading, error])
 
+function updateConfirmedStatus({id,status}:{id:string,status:string}){
+  let UpdateStatus:string
+  if(status=="Completed"){
+    UpdateStatus ="InComplete"
+  }
+  else{
+    UpdateStatus ="Completed"
+
+  }
+  updateConfirmed(
+    `
+    mutation Mutation($input: updateTodoInput!) {
+        updateTodo(input: $input) {
+          id
+          text
+          status
+          star
+          createdOn
+          updatedOn
+        }
+      }`,{
+      input:{
+        id,
+        status:UpdateStatus
+
+      }
+    }
+  )
+}
   return (
 
     <main>
@@ -123,7 +154,7 @@ export default function Home() {
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} />
+                        <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} onChange={()=>updateConfirmedStatus({id:item?.id,status:item?.status})}/>
 
                       </Box>
                     )
