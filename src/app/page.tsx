@@ -29,6 +29,7 @@ export default function Home() {
   ]
 
   return (
+
     <main>
       <CheckBoxInput label="testing" possible={true} />
       <InputButton />
