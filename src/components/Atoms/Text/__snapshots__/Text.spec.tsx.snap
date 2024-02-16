@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Text Component > renders with custom color 1`] = `
+<p
+  class="css-16ehan8"
+  color="red"
+>
+  Custom Color Text
+</p>
+`;
+
+exports[`Text Component > renders with custom font family 1`] = `
+<p
+  class="css-1yusjdk"
+  font-family="Arial, sans-serif"
+>
+  Custom Font Family Text
+</p>
+`;
+
+exports[`Text Component > renders with custom font size 1`] = `
+<p
+  class="css-14ggzw9"
+  font-size="20px"
+>
+  Custom Font Size Text
+</p>
+`;
+
+exports[`Text Component > renders with custom margin and padding 1`] = `
+<p
+  class="css-9pjzk3"
+>
+  Custom Margin and Padding Text
+</p>
+`;
+
+exports[`Text Component > renders with custom margin-top, margin-right, margin-bottom, and margin-left 1`] = `
+<p
+  class="css-83q1dl"
+>
+  Custom Margin Text
+</p>
+`;
+
+exports[`Text Component > renders with custom padding-top, padding-right, padding-bottom, and padding-left 1`] = `
+<p
+  class="css-hglw8m"
+>
+  Custom Padding Text
+</p>
+`;
+
+exports[`Text Component > renders with default styles if no props are provided 1`] = `
+<p
+  class="css-9ng7ju"
+>
+  Hello, World!
+</p>
+`;
