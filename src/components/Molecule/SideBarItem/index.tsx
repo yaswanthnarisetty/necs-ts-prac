@@ -11,7 +11,7 @@ const SideItemBox = styled(Box)`
 
 const SideBarItem = ({ active, itemName, itemIcon }: { active: boolean, itemName: string, itemIcon: ReactElement }) => {
     return (
-        <SideItemBox padding='10px 20px' width='100%' backgroundColor={active ? "lightgray" : "transparent"}
+        <SideItemBox padding='10px 20px' backgroundColor={active ? "lightgray" : "transparent"}
             borderRadius={10}
             m='30px'
             style={{ cursor: "pointer", fontSize: "16px", color: 'white', display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
