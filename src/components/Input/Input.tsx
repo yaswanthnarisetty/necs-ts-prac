@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Text from "@/components/Text/Text";
 import { css } from "@emotion/css";
 import { useTheme, Theme } from "@emotion/react";
 type InputProps = {
