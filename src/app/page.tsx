@@ -41,10 +41,10 @@ export default function Home() {
         {/* <CheckBoxInput label="testing" possible={true} />
         <InputButton />
         {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)} */}
-        <Box style={{ display: "grid", gridTemplateColumns: "25% 75%", gap: "20px" }}>
+        <Box style={{ display: "grid", gridTemplateColumns: "30% 70%", gap: "20px", margin: "10px 100px" }}>
 
           <SideBar title={"Filters"}  height={"300px"} >
-            sxrdctfyguhnijm,k
+            
           </SideBar>
           <SideBar title={selectedpage=="ALL"?"Tasks":"Starred"}  height={"300px"}>
             {selectedpage =="ALL" ?<Box>

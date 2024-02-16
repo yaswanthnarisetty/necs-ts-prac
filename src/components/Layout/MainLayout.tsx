@@ -25,14 +25,15 @@ font-family: 'Roboto Condensed', sans-serif;
   font-size: 2.5rem;
   letter-spacing: 0.6rem;
   margin: 0;
+  margin-bottom: 30px;
   color:#7b61da
 `
 
 
   return (
     <BackgroundContainer>
-      <Box padding='50px 100px'>
-        <StyledText ><span style={{ color: '#000' }}>to</span>do.</StyledText>
+      <Box padding='50px 100px' >
+        <StyledText><span style={{ color: '#000' }}>to</span>do.</StyledText>
         {props.children}
       </Box>
     </BackgroundContainer >
