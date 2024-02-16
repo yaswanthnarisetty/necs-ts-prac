@@ -7,7 +7,7 @@ import {
 import { trpc } from "@/utils/_trpc";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
 
-export default async function Home() {
+export default  function Home() {
   // const users = await trpc.Query.hello.query({ name: "R" });
   // console.log(users);
   return (
@@ -15,4 +15,4 @@ export default async function Home() {
       <CheckBoxInput label="testing" possible={true} />
     </main>
   );
-}
+};
