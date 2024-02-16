@@ -7,20 +7,20 @@ import { useLazyQuery } from '@/app/hooks';
 import { serverFetch } from '@/app/actions';
 import { TodoData } from '@/app/page';
 type CustomCheckboxProps = {
-    label: string;
-    checked?: boolean;
-    possible: boolean;
-    name?: string;
-    onChange?: () => void;
-    width?: string;
-    height?: string;
-    padding?: number;
-    margin?: string;
-    id?: string;
-    completed?: boolean;
-    stareed?: boolean;
-    allTodoData?: TodoData[]
-    setAllTodoData: Function
+  label: string;
+  checked?: boolean;
+  possible: boolean;
+  name?: string;
+  onChange?: () => void;
+  width?: string;
+  height?: string;
+  padding?: number;
+  margin?: string;
+  id?: string;
+  completed?: boolean;
+  stareed?: boolean;
+  allTodoData?: TodoData[]
+  setAllTodoData?: Function
 };
 
 const CheckboxContainer = styled.div<CustomCheckboxProps>`
@@ -45,7 +45,7 @@ const Label = styled.label<CustomCheckboxProps>`
 `;
 
 interface StyledCheckboxStyles {
-    possible: boolean;
+  possible: boolean;
 }
 
 const StyledCheckbox = styled.input<StyledCheckboxStyles>`
@@ -56,26 +56,26 @@ const StyledCheckbox = styled.input<StyledCheckboxStyles>`
   `;
 
 const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
-    checked,
-    possible,
-    name,
-    width,
-    height,
-    padding,
-    margin,
-    id,
-    completed,
-    stareed,
-    allTodoData,
-    setAllTodoData,
-    onChange }: CustomCheckboxProps) => {
-    const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, '-')}`;
+  checked,
+  possible,
+  name,
+  width,
+  height,
+  padding,
+  margin,
+  id,
+  completed,
+  stareed,
+  allTodoData,
+  setAllTodoData,
+  onChange }: CustomCheckboxProps) => {
+  const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, '-')}`;
 
-    const [updataTodo, { data, loading, error }] = useLazyQuery(serverFetch)
+  const [updataTodo, { data, loading, error }] = useLazyQuery(serverFetch)
 
-    function Starrded() {
-        updataTodo(
-            `
+  function Starrded() {
+    updataTodo(
+      `
     mutation Mutation($input: updateTodoInput!) {
         updateTodo(input: $input) {
           id
@@ -86,46 +86,48 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
           updatedOn
         }
       }`, {
-            "input": {
-                id,
-                star: !stareed
-            }
-        }
-        )
+      "input": {
+        id,
+        star: !stareed
+      }
     }
-    useEffect(() => {
-        if (data) {
-            setAllTodoData(allTodoData?.map((item: TodoData) => {
-                if (item?.id === id) {
-                    item.star = !stareed
-
-                }
-                return item;
-            }))
-        }
-    }, [data, error])
-    return (
-        <Box>
-            <CheckboxContainer
-                width={width}
-                height={height}
-                padding={padding}
-                margin={margin} label={''} possible={false}>
-                <Box display="flex" flexDirection="row" alignItems="center" gap="20px">
-                    <StyledCheckbox
-                        possible={possible}
-                        id={inputId}
-                        type="checkbox"
-                        name={name}
-                        onChange={onChange}
-                        disabled={!possible} />
-                    <Label htmlFor={inputId} completed={completed} label={''} possible={false}>{label}</Label>
-                </Box>
-                {stareed ? <Star fill='yellow' color='#2f2e36' onClick={() => Starrded()} /> : <Star color="#eef6f5" onClick={() => Starrded()} />
-                }
-            </CheckboxContainer>
-        </Box>
     )
+  }
+  useEffect(() => {
+    if (data) {
+      if (typeof setAllTodoData === "function")
+        setAllTodoData(allTodoData?.map((item: TodoData) => {
+          if (item?.id === id) {
+            item.star = !stareed
+
+          }
+          return item;
+        }))
+    }
+  }, [data, error])
+  return (
+    <Box>
+      <CheckboxContainer
+        width={width}
+        height={height}
+        padding={padding}
+        margin={margin} label={''} possible={false}>
+        <Box display="flex" flexDirection="row" alignItems="center" gap="20px">
+          <StyledCheckbox
+            possible={possible}
+            id={inputId}
+            type="checkbox"
+            name={name}
+            onChange={onChange}
+            disabled={!possible} />
+          <Label htmlFor={inputId} completed={completed} label={''} possible={false}>{label}</Label>
+        </Box>
+        {stareed ? <Star fill='yellow' color='#2f2e36' onClick={() => Starrded()} cursor="pointer" />
+          : <Star color="#eef6f5" onClick={() => Starrded()} cursor="pointer" />
+        }
+      </CheckboxContainer>
+    </Box>
+  )
 }
 
 

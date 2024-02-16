@@ -9,10 +9,11 @@ const SideItemBox = styled(Box)`
     }
 `
 
-const SideBarItem = ({ active, itemName, itemIcon }: { active: boolean, itemName: string, itemIcon: ReactElement }) => {
+const SideBarItem = ({ active, itemName, itemIcon, setSelectedpage }: { active: string, itemName: string, itemIcon: ReactElement, setSelectedpage: Function }) => {
     return (
-        <SideItemBox padding='10px 20px' backgroundColor={active ? "lightgray" : "transparent"}
+        <SideItemBox padding='10px 20px' backgroundColor={active === itemName.toUpperCase() ? "lightgray" : "transparent"}
             borderRadius={10}
+            onClick={() => setSelectedpage(itemName.toUpperCase())}
             m='30px'
             style={{ cursor: "pointer", fontSize: "16px", color: 'white', display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
             {itemIcon}
