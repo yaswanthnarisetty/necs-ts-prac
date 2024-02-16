@@ -35,9 +35,9 @@ export default function Home() {
     <main>
       <MainLayout>
         
-        <CheckBoxInput label="testing" possible={true} />
+        <CheckBoxInput label="testing" possible={true} width="300px" height="40px"/>
         <InputButton />
-        {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)}
+        {sideBarItems.map((item: sideBarItemProp,index:number) => <SideBarItem key={index}  active={item.active} itemName={item.name} itemIcon={item.icon} />)}
       </MainLayout>
     </main>
   );
