@@ -1,15 +1,29 @@
-"use client"
+import Button from "@/components/Atoms/Button";
+import Text from "@/components/Atoms/Text";
 import React from "react";
-import Box from "@/components/Atoms/Box";
-import Button from "@/components/Button/Button";
 
-export default function Home() {
-
+const MyComponent = () => {
   return (
-    <main>
-      <Box backgroundcolor="green" padding="100px" display="flex" height="100px" width="200px">
-        <Button>hello</Button>
-      </Box>
-    </main>
+    <div>
+      <Text
+        color="blue"
+        fontSize="16px"
+        fontWeight="bold"
+        lineHeight="1.5"
+        mt="10px"
+        mr="20px"
+        mb="10px"
+        ml="20px"
+        paddingTop="5px"
+        paddingRight="10px"
+        paddingBottom="5px"
+        paddingLeft="10px"
+      >
+        Hello, World!
+      </Text>
+      <Button size="md">Click Me!</Button>
+    </div>
   );
-}
+};
+
+export default MyComponent;
