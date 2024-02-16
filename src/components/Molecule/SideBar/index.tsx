@@ -20,17 +20,18 @@ const SideBar: React.FC<SideBarProps> = ({
 }) => (
   <Box
     width={width}
-    height={height}
+    height='400px'
     borderRadius={borderRadius || 30}
-    backgroundColor="#d3d0d6"
+    backgroundColor="#fff"
     padding="40px"
     display="flex"
     justifyContent="flex-start"
-    alignItems="center"
+    alignItems="flex-start"
     flexDirection="column"
     gap='30px'
+    style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
   >
-    <Text fontSize="30px" color="white" padding="20px" fontWeight="bold">
+    <Text fontSize="28px" color="#7b61da" padding="20px" fontWeight="bold">
       {title}
     </Text>
     <Box >
