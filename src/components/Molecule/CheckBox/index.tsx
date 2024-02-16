@@ -64,10 +64,10 @@ const CheckBoxInput : React.FC<CustomCheckboxProps>=({ label,
 return(
     <Box>
         <CheckboxContainer
-        width={width} 
-    height={height}
-    padding={padding}
-    margin={margin}>
+      width={width}
+      height={height}
+      padding={padding}
+      margin={margin} label={''} possible={false}>
         <Box display="flex" flexDirection="row" alignItems="center" gap="20px">
             <StyledCheckbox 
              possible={possible}
@@ -76,7 +76,7 @@ return(
              name={name}
              onChange={onChange}
              disabled={!possible} />
-            <Label htmlFor={inputId} completed={completed}>{label}</Label>
+            <Label htmlFor={inputId} completed={completed} label={''} possible={false}>{label}</Label>
             </Box>
             {id?<Star fill='yellow' color='#2f2e36' />:<Star color="#eef6f5" />
 }
@@ -85,46 +85,6 @@ return(
 )
 }
 
-const StyledCheckbox = styled.input<StyledCheckboxStyles>`
-  width: 16px;
-  height: 16px;
-  cursor: ${(props: StyledCheckboxStyles) =>
-    props.possible ? "pointer" : "not-allowed"};
-  background: "none";
-`;
 
-const CheckBoxInput: React.FC<CustomCheckboxProps> = ({
-  label,
-  checked,
-  possible,
-  name,
-  width,
-  height,
-  padding,
-  margin,
-  onChange,
-}: CustomCheckboxProps) => {
-  const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, "-")}`;
-  return (
-    <Box>
-      <CheckboxContainer
-        width={width}
-        height={height}
-        padding={padding}
-        margin={margin}
-      >
-        <StyledCheckbox
-          possible={possible}
-          id={inputId}
-          type="checkbox"
-          name={name}
-          onChange={onChange}
-          disabled={!possible}
-        />
-        <Label htmlFor={inputId}>{label}</Label>
-      </CheckboxContainer>
-    </Box>
-  );
-};
 
 export default CheckBoxInput;
