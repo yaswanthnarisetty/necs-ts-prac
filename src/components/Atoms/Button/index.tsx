@@ -20,21 +20,21 @@ export type ButtonProps = {
 }
 
 const Button = styled.button<ButtonProps>`
-  margin: ${(props) => props.m || '0'};
-  margin-left: ${(props) => props.ml};
-  margin-right: ${(props) => props.mr};
-  margin-top: ${(props) => props.mt};
-  margin-bottom: ${(props) => props.mb};
-  padding-top: ${(props) => props.pt};
-  padding-bottom: ${(props) => props.pb};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  padding: ${(props) => props.p || '0.5rem 1rem'};
-  color: ${(props) => props.color || '#fff'};
-  background: ${(props) => props.bgColor || 'linear-gradient(160deg, rgb(145, 114, 247) 0%, rgb(104, 61, 247) 100%)'};
-  border: ${(props) => props.border || 'none'};
-  border-radius: ${(props) => props.borderRadius || '30px'};
-  font-size: ${(props) => {
+  margin: ${(props: ButtonProps) => props.m || '0'};
+  margin-left: ${(props: ButtonProps) => props.ml};
+  margin-right: ${(props: ButtonProps) => props.mr};
+  margin-top: ${(props: ButtonProps) => props.mt};
+  margin-bottom: ${(props: ButtonProps) => props.mb};
+  padding-top: ${(props: ButtonProps) => props.pt};
+  padding-bottom: ${(props: ButtonProps) => props.pb};
+  padding-left: ${(props: ButtonProps) => props.pl};
+  padding-right: ${(props: ButtonProps) => props.pr};
+  padding: ${(props: ButtonProps) => props.p || '0.5rem 1rem'};
+  color: ${(props: ButtonProps) => props.color || '#fff'};
+  background: ${(props: ButtonProps) => props.bgColor || 'linear-gradient(160deg, rgb(145, 114, 247) 0%, rgb(104, 61, 247) 100%)'};
+  border: ${(props: ButtonProps) => props.border || 'none'};
+  border-radius: ${(props: ButtonProps) => props.borderRadius || '30px'};
+  font-size: ${(props: ButtonProps) => {
     switch (props.size) {
       case 'sm':
         return '0.7rem';
