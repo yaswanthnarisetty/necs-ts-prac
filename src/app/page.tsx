@@ -72,7 +72,7 @@ export default function Home() {
           </SideBar>
           <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
             {selectedpage == "ALL" ? <Box>
-              { }
+              <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
             </Box> : <></>}
 
           </SideBar>
