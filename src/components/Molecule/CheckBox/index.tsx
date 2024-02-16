@@ -34,7 +34,44 @@ const Label = styled.label`
 `;
 
 interface StyledCheckboxStyles {
-  possible: boolean;
+    possible: boolean;
+  }
+  
+  const StyledCheckbox = styled.input<StyledCheckboxStyles>`
+    width: 16px;
+    height: 16px;
+    cursor: ${(props:StyledCheckboxStyles) => (props.possible ? "pointer" : "not-allowed")}; 
+    background: "none";
+  `;
+
+const CheckBoxInput : React.FC<CustomCheckboxProps>=({ label,
+    checked,
+    possible,
+    name,
+    width,
+    height,
+    padding,
+    margin,
+    onChange }: CustomCheckboxProps) =>{
+        const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, '-')}`;
+return(
+    <Box>
+        <CheckboxContainer
+      width={width}
+      height={height}
+      padding={padding}
+      margin={margin}  possible={false}>
+            <StyledCheckbox 
+             possible={possible}
+             id={inputId}
+             type="checkbox"
+             name={name}
+             onChange={onChange}
+             disabled={!possible}/>
+            <Label htmlFor={inputId}>{label}</Label>
+        </CheckboxContainer>
+    </Box>
+)
 }
 
 const StyledCheckbox = styled.input<StyledCheckboxStyles>`
