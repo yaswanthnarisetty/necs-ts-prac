@@ -1,3 +1,4 @@
+import Button from "@/components/Atoms/Button";
 import Text from "@/components/Atoms/Text";
 import React from "react";
 
@@ -20,6 +21,7 @@ const MyComponent = () => {
       >
         Hello, World!
       </Text>
+      <Button size="md">Click Me!</Button>
     </div>
   );
 };
