@@ -25,4 +25,16 @@ describe('Button', () => {
         const button = screen.getByRole('button');
         fireEvent.click(button)
     })
+
+    test("Check if button is getting size applied", () => {
+        render(<Button size="lg" >Click</Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveStyle('font-size: 20px');
+    })
+
+    test("Check if button taking text children", () => {
+        render(<Button size="lg" >Click Me</Button>);
+        const button = screen.getByRole('button');
+        expect(button).toHaveTextContent("Click Me");
+    })
 })
