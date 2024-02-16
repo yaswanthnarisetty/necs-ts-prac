@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import {
@@ -9,34 +9,28 @@ import { trpc } from "@/utils/_trpc";
 import CheckBoxInput from "@/components/Molecule/CheckBox";
 import InputButton from "@/components/Molecule/InputButton";
 import Text from "@/components/Atoms/Text";
+import SideBar from "@/components/Molecule/SideBar";
 
 export default function Home() {
   // const users = await trpc.Query.hello.query({ name: "R" });
   // console.log(users);
   return (
-   
     <main>
-      <CheckBoxInput label="testing" possible={true} />
-      <InputButton />
-      <div >
-      <Text
-        color="blue"
+      <SideBar
+        title="Your Sidebar Title"
+        width="300px"
+        height="400px"
+        borderRadius="20px"
+      >
+        <Text
+        color="white"
         fontSize="16px"
         fontWeight="bold"
-        lineHeight="1.5"
-        mt="100px"
-        mr="200px"
-        mb="10px"
-        ml="20px"
-        paddingTop="100px"
-        paddingRight="10px"
-        paddingBottom="100px"
-        paddingLeft="100px"
-        backgroundcolor="red"
+        mt="60px"
       >
         Hello, World!
       </Text>
-    </div>
+      </SideBar>
     </main>
   );
-};
+}
