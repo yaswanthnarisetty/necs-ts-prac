@@ -11,7 +11,7 @@ type MainLayoutProps = {
 const MainLayout: React.FC<MainLayoutProps> = (props) => {
 
   const BackgroundContainer = styled.div`
-    height:100vh;
+    min-height:100vh;
     min-width: 300px;
     background: rgb(237,255,245);
     background: linear-gradient(47deg, rgba(237,255,245,1) 0%, rgba(255,255,255,1) 50%, rgba(238,228,247,1) 100%);

@@ -7,7 +7,7 @@ import InputButton from "@/components/Molecule/InputButton";
 import SideBar from "@/components/Molecule/SideBar";
 import SideBarItem from "@/components/Molecule/SideBarItem";
 import { ClipboardCheck, Star } from 'lucide-react';
-import { ReactElement, useEffect, useState } from "react";
+import { FormEvent, ReactElement, useEffect, useState } from "react";
 import { useLazyQuery } from "./hooks";
 import { serverFetch } from "./actions";
 import Text from "@/components/Atoms/Text";
@@ -35,15 +35,37 @@ export default function Home() {
   const sideBarItems: sideBarItemProp[] = [
     {
       name: "All",
-      icon: <ClipboardCheck size={16} color="#fff" />,
+      icon: <ClipboardCheck size={16} color="#000" />,
       active: true
     },
     {
       name: "Starred",
-      icon: <Star fill="#fff" size={16} color="#fff" />,
-      active: true
+      icon: <Star fill="#000" size={16} color="#000" />,
+      active: false
     }
   ]
+
+
+
+  const [todo, setTodo] = useState<string>("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    try {
+      const addTodoResponse = await fetch("url", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ todo }),
+        cache: "no-store"
+      })
+    } catch (error) {
+
+    }
+
+  }
   useEffect(() => {
     getAllTodos(
       `
@@ -87,10 +109,12 @@ export default function Home() {
         {/* <CheckBoxInput label="testing" possible={true} />
         <InputButton />
         {sideBarItems.map((item: sideBarItemProp) => <SideBarItem active={item.active} itemName={item.name} itemIcon={item.icon} />)} */}
-        <Box style={{ display: "grid", gridTemplateColumns: "30% 70%", gap: "20px", margin: "10px 100px" }}>
+        <Box style={{ display: "grid", gridTemplateColumns: "30% 70%", gap: "30px", margin: "10px 5%" }}>
 
-          <SideBar title={"Filters"} height={"300px"} >
-
+          <SideBar title={"Filters"} height={"300px"}>
+            <Box display="flex" justifyContent="flex-start" flexDirection="column" gap="15px" >
+              {sideBarItems.map((item: sideBarItemProp,index:number) => <SideBarItem key={index} active={item.active} itemName={item.name} itemIcon={item.icon} />)}
+            </Box>
           </SideBar>
           <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
             {selectedpage == "ALL" ? <Box>
