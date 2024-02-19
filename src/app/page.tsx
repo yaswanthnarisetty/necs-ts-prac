@@ -163,7 +163,7 @@ export default function Home() {
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxReplica label={item?.text} allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star)} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status == "Completed" ? true : false} status={item?.status} />
+                        <CheckBoxReplica label={item?.text} allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star === true)} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status == "Completed" ? true : false} status={item?.status} />
                       </Box>
                     )
                   })}
