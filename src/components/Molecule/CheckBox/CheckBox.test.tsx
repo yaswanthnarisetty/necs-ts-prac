@@ -5,7 +5,7 @@ import CheckBoxInput from ".";
 describe("Testing Checkbox",()=>{
     test("Testing CheckBox", () => {
         render(
-          <CheckBoxInput name="testing" possible={true} label="Testing" />
+          <CheckBoxInput name="testing" possible={true} label="Testing" setAllTodoData={undefined} />
         );  
         const textElement = screen.getByText("Testing");
         expect(textElement).toBeInTheDocument();   

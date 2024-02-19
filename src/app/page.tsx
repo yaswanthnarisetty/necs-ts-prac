@@ -9,6 +9,7 @@ import { ClipboardCheck, Star } from 'lucide-react';
 import { FormEvent, ReactElement, useEffect, useState } from "react";
 import { useLazyQuery } from "./hooks";
 import { serverFetch } from "./actions";
+import CheckBoxReplica from "@/components/Molecule/CheckboxReplica";
 export const sideBarItems = [
   {
     name: "All",
@@ -27,9 +28,22 @@ export type TodoData = {
   createdOn?: string;
   updatedOn?: string;
 }
+const datata: TodoData[] = [
+  {
+    id: "123",
+    status: "Completed",
+    star: true,
+    text: "testing",
+  }, {
+    id: "1234",
+    status: "",
+    star: true,
+    text: "testing",
+  }
+]
 export default function Home() {
   const [selectedpage, setSelectedpage] = useState<string>("ALL")
-  const [allTodoData, setAllTodoData] = useState<TodoData[]>([]);
+  const [allTodoData, setAllTodoData] = useState<TodoData[]>(datata);
   const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
   const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch)
 
@@ -121,36 +135,6 @@ export default function Home() {
     }
   }, [data, loading, error])
 
-  function updateConfirmedStatus({ id, status }: { id: string, status: string }) {
-    let UpdateStatus: string
-    if (status == "Completed") {
-      UpdateStatus = "InComplete"
-    }
-    else {
-      UpdateStatus = "Completed"
-    }
-    updateConfirmed(
-      `
-    mutation Mutation($input: updateTodoInput!) {
-        updateTodo(input: $input) {
-          id
-          text
-          status
-          star
-          createdOn
-          updatedOn
-        }
-      }`, {
-      input: {
-        id,
-        status: UpdateStatus
-
-      }
-    }
-    )
-  }
-
-
 
   return (
     <main>
@@ -179,8 +163,7 @@ export default function Home() {
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxInput allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star)} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} onChange={() => updateConfirmedStatus({ id: item?.id, status: item?.status })} />
-
+                        <CheckBoxReplica label={item?.text} allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star)} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status == "Completed" ? true : false} status={item?.status} />
                       </Box>
                     )
                   })}
