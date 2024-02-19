@@ -16,9 +16,11 @@ type CheckBoxReplicaProps = {
   margin?: string;
   id?: string;
   completed?: boolean;
-  allTodoData?: TodoData[]
-  setAllTodoData?: Function
+  allTodoData?: TodoData[];
+  setAllTodoData?: Function;
   status?: string;
+  setCurrentAction?: Function;
+  setCurrentId?: Function;
 }
 function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
 
@@ -130,31 +132,31 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
   }, [respupdateConfirmed?.data, respupdateConfirmed?.error])
 
 
-          function DeleteTodo() {
-            deleteTodo(
-                `
+  function DeleteTodo() {
+    deleteTodo(
+      `
                 mutation Mutation($deleteTodoId: ID!) {
                     deleteTodo(id: $deleteTodoId)
-                  }`,{
-                    "deleteTodoId": props?.id
-                  }
-            )
-        // const deletTodo = (id: number) => {
-        //     console.log("hlo");
-        //     const updatedArray: any = props?.allTodoData.filter((item: any) => item.id !== id);
-        //     props?.setAllTodoData(updatedArray);
-        //   };
+                  }`, {
+      "deleteTodoId": props?.id
+    }
+    )
+    // const deletTodo = (id: number) => {
+    //     console.log("hlo");
+    //     const updatedArray: any = props?.allTodoData.filter((item: any) => item.id !== id);
+    //     props?.setAllTodoData(updatedArray);
+    //   };
 
-        }
-        useEffect(()=>{
-            if(respdeleteTodo?.data){
-            const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
-            if (typeof props.setAllTodoData === "function")
-            props?.setAllTodoData(updatedArray);
+  }
+  useEffect(() => {
+    if (respdeleteTodo?.data) {
+      const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
+      if (typeof props.setAllTodoData === "function")
+        props?.setAllTodoData(updatedArray);
 
-            }
+    }
 
-        },[respdeleteTodo?.data,respdeleteTodo?.loading,respdeleteTodo?.error])
+  }, [respdeleteTodo?.data, respdeleteTodo?.loading, respdeleteTodo?.error])
   return (
     <StyledBox height={`${props?.height}`} onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)} >
@@ -173,7 +175,12 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
         {isHovered && <Box display="flex" flexDirection="row" alignItems="end" gap="15px">
           <Trash2 size={20} color="#9a9898" strokeWidth={3} onClick={() => DeleteTodo()} />
 
-          <Pencil size={20} color="#9a9898" strokeWidth={3} />
+          <Pencil size={20} color="#9a9898" strokeWidth={3} onClick={() => {
+            if (typeof props.setCurrentAction === "function")
+              props.setCurrentAction("UPDATE");
+            if (typeof props.setCurrentId === "function")
+              props.setCurrentId(props.id);
+          }} />
         </Box>}
         {props?.stared ? <Star fill='yellow' color='#2f2e36' onClick={() => Starrded()} /> : <Star color="#9a9898" onClick={() => Starrded()} />
         }

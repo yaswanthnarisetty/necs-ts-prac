@@ -58,6 +58,9 @@ export default function Home() {
 
   const [todo, setTodo] = useState<string>("");
   const [addTodo, addTodoResponse] = useLazyQuery(serverFetch);
+  const [updateTodo, updateTodoResponse] = useLazyQuery(serverFetch);
+  const [currentAction, setCurrentAction] = useState<'ADD' | 'UPDATE'>("ADD");
+  const [currentId, setCurrentId] = useState<string>('');
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,28 +68,51 @@ export default function Home() {
       alert("Add some Task!!");
       return;
     }
-    addTodo(`
-    mutation CreateTodo($input: TodoInput!) {
-      createTodo(input: $input) {
-        id
-        text
-        status
-        star
-        createdOn
-        updatedOn
-      }
-    }`,
-      {
-        "input": {
-          "star": false,
-          "status": "InComplete",
-          "text": todo
+    if (currentAction === "ADD")
+      addTodo(`
+      mutation CreateTodo($input: TodoInput!) {
+        createTodo(input: $input) {
+          id
+          text
+          status
+          star
+          createdOn
+          updatedOn
         }
-      },
-      {
-        cache: "no-store"
-      }
-    )
+      }`,
+        {
+          "input": {
+            "star": false,
+            "status": "InComplete",
+            "text": todo
+          }
+        },
+        {
+          cache: "no-store"
+        }
+      )
+    else
+      updateTodo(`
+        mutation UpdateTodo($input: updateTodoInput!) {
+          updateTodo(input: $input) {
+            id
+            text
+            star
+            status
+            createdOn
+            updatedOn
+          }
+        }`,
+        {
+          "input":{
+           id:currentId,
+          text: todo
+          }
+            
+        },
+        {
+          cache: "no-store"
+        })
   }
 
   useEffect(() => {
@@ -95,6 +121,28 @@ export default function Home() {
       setTodo("");
     }
   }, [addTodoResponse.data, addTodoResponse.error])
+
+  useEffect(() => {
+    if (updateTodoResponse.data) {
+      setAllTodoData(allTodoData?.map((item: TodoData) => {
+          if (item?.id === currentId) {
+            item.text = todo
+
+          }
+          return item;
+        }))
+      setTodo("");
+      setCurrentId('');
+      setCurrentAction('ADD');
+    }
+  }, [updateTodoResponse.data, updateTodoResponse.error])
+
+  useEffect(() => {
+    if (currentAction === 'UPDATE') {
+      setTodo((allTodoData.find(todo => todo.id === currentId)?.text)!);
+      
+    }
+  }, [currentAction, currentId])
 
   useEffect(() => {
     const where = selectedpage === "STARRED" ? {
@@ -157,13 +205,18 @@ export default function Home() {
           </SideBar>
           <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
             <Box>
-              {selectedpage === "ALL" && <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />}
+              {selectedpage === "ALL" && <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} currentAction={currentAction} setCurrentAction={setCurrentAction} setCurrentId={setCurrentId} />}
               {allTodoData?.length > 0 &&
                 <Box display="flex" flexDirection="column" gap="20px" mt="20px" maxHeight="290px" overflowy="auto">
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxReplica label={item?.text} allTodoData={allTodoData} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status == "Completed" ? true : false} status={item?.status} />
+                        <CheckBoxReplica label={item?.text} allTodoData={allTodoData} setAllTodoData={setAllTodoData}
+                          stared={item?.star} height="40px" id={item?.id}
+                          completed={item?.status == "Completed" ? true : false}
+                          setCurrentAction={setCurrentAction}
+                          setCurrentId={setCurrentId}
+                          status={item?.status} />
                       </Box>
                     )
                   })}
