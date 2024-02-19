@@ -1,14 +1,17 @@
 import mercury from "@mercury-js/core";
 export const TodoSchema = {
-  text: {
-    type: "string",
-  },
-  star: {
-    type: "boolean"
-  },
-  status: {
-    type: "boolean"
-  }
+    text: {
+        type: "string",
+    },
+    star: {
+        type: "boolean"
+    },
+    status: {
+        type: "enum",
+        enumType: "string",
+        enum: ["Completed", "InComplete"],
+        default: "InComplete",
+    }
 };
 
 export const Todo = mercury.createModel("Todo", TodoSchema, {});
