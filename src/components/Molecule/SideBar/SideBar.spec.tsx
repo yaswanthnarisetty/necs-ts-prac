@@ -1,11 +1,11 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import SideBar from "./index";
 import Text from "@/components/Atoms/Text";
 
 test("renders SideBar component with title and children", () => {
   const { getByText, getByTestId } = render(
-    <SideBar title="Test Title" width="300px" height="400px" borderRadius="20px">
+    <SideBar title="Test Title" width="300px" height="400px" borderRadius={20}>
       <Text color="white" fontSize="16px" fontWeight="bold" mt="60px">
         Hello, World!
       </Text>
@@ -20,14 +20,13 @@ test("renders SideBar component with title and children", () => {
 });
 
 test("applies styles correctly", () => {
-  const { getByTestId } = render(
-    <SideBar title="Test Title" width="300px" height="400px" borderRadius="20px" />
+  render(
+    <SideBar title="Test Title" width="300px" height="400px" borderRadius={20} />
   );
 
-  const sideBarElement = getByTestId("sidebar");
+  const sideBarElement = screen.getByTestId('SideBarBox');
 
   expect(sideBarElement).toHaveStyle("width: 300px");
   expect(sideBarElement).toHaveStyle("height: 400px");
   expect(sideBarElement).toHaveStyle("border-radius: 20px");
-  // Add more style checks as needed
 });

@@ -29,6 +29,7 @@ const SideBar: React.FC<SideBarProps> = ({
     alignItems="flex-start"
     flexDirection="column"
     gap="30px"
+    data-testid="SideBarBox"
     style={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}
   >
     <Text fontSize="28px" color="#7b61da" padding="20px" fontWeight="bold">

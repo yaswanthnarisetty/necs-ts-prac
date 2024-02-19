@@ -10,6 +10,9 @@ export default defineConfig({
         environment: 'happy-dom',
         setupFiles: ['./setup.ts'],
         css: true,
+        coverage: {
+            provider: 'v8' // or 'istanbul'
+        },
     },
     resolve: {
         alias: {
