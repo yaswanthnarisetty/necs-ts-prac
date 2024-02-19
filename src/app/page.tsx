@@ -28,17 +28,17 @@ export type TodoData = {
   createdOn?: string;
   updatedOn?: string;
 }
-const datata:TodoData[]=[
+const datata: TodoData[] = [
   {
-  id: "123",
-  status: "Completed",
-  star: true,
-  text: "testing",
-  },{
+    id: "123",
+    status: "Completed",
+    star: true,
+    text: "testing",
+  }, {
     id: "1234",
-  status: "",
-  star: true,
-  text: "testing",
+    status: "",
+    star: true,
+    text: "testing",
   }
 ]
 export default function Home() {
@@ -163,10 +163,7 @@ export default function Home() {
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                      <CheckBoxReplica label={item?.text} allTodoData={allTodoData} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status=="Completed"?true:false} status={item?.status}/>
-
-                        {/* <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} status={item?.status} completed={item?.status=="Completed"?true:false}/> */}
-
+                        <CheckBoxReplica label={item?.text} allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star)} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status == "Completed" ? true : false} status={item?.status} />
                       </Box>
                     )
                   })}
