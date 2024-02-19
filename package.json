@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest",
+    "test": "vitest",
     "vtest": "vitest-preview"
   },
   "dependencies": {
@@ -62,6 +62,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "happy-dom": "^12.10.3",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "msw": "^2.0.11",
     "msw-storybook-addon": "2.0.0--canary.122.06f0c92.0",
     "storybook": "^7.6.6",
@@ -75,8 +76,16 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "testMatch": ["**/__tests__/**/*.test.ts?(x)"],
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "testMatch": [
+      "**/__tests__/**/*.test.ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
-  
 }
