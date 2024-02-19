@@ -10,8 +10,6 @@ const SideItemBox = styled(Box)`
 `
 
 const SideBarItem = ({ active, itemName, itemIcon, setSelectedpage }: { active: string, itemName: string, itemIcon: ReactElement, setSelectedpage: Function }) => {
-    console.log(active === itemName.toUpperCase());
-    
     
     return (
         <SideItemBox data-testid="tabBox" padding='10px 20px' backgroundColor={active === itemName.toUpperCase() ? "lightgray" : "transparent"}
