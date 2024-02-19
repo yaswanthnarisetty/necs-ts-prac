@@ -26,14 +26,16 @@ type CheckBoxReplicaProps = {
   allTodoData?: TodoData[];
   setAllTodoData?: Function;
   status?: string;
-};
+  setCurrentAction?: Function;
+  setCurrentId?: Function;
+}
 function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
   const [updataTodo, { data, loading, error }] = useLazyQuery(serverFetch);
   const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch);
   const [deleteTodo, respdeleteTodo] = useLazyQuery(serverFetch);
 
   const [isHovered, setIsHovered] = useState(false);
-  const StyledBox = styled(Box)<CheckBoxReplicaProps>`
+  const StyledBox = styled(Box) <CheckBoxReplicaProps>`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -43,7 +45,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
     text-align: center;
     background-color: #eee;
   `;
-  const StyledText = styled(Text)<CheckBoxReplicaProps>`
+  const StyledText = styled(Text) <CheckBoxReplicaProps>`
     font-size: 20px;
     color: black;
     text-align: center;
@@ -133,31 +135,31 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
     }
   }, [respupdateConfirmed?.data, respupdateConfirmed?.error]);
 
-          function DeleteTodo() {
-            deleteTodo(
-                `
+  function DeleteTodo() {
+    deleteTodo(
+      `
                 mutation Mutation($deleteTodoId: ID!) {
                     deleteTodo(id: $deleteTodoId)
-                  }`,{
-                    "deleteTodoId": props?.id
-                  }
-            )
-        // const deletTodo = (id: number) => {
-        //     console.log("hlo");
-        //     const updatedArray: any = props?.allTodoData.filter((item: any) => item.id !== id);
-        //     props?.setAllTodoData(updatedArray);
-        //   };
+                  }`, {
+      "deleteTodoId": props?.id
+    }
+    )
+    // const deletTodo = (id: number) => {
+    //     console.log("hlo");
+    //     const updatedArray: any = props?.allTodoData.filter((item: any) => item.id !== id);
+    //     props?.setAllTodoData(updatedArray);
+    //   };
 
-        }
-        useEffect(()=>{
-            if(respdeleteTodo?.data){
-            const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
-            if (typeof props.setAllTodoData === "function")
-            props?.setAllTodoData(updatedArray);
+  }
+  useEffect(() => {
+    if (respdeleteTodo?.data) {
+      const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
+      if (typeof props.setAllTodoData === "function")
+        props?.setAllTodoData(updatedArray);
 
-            }
+    }
 
-        },[respdeleteTodo?.data,respdeleteTodo?.loading,respdeleteTodo?.error])
+  }, [respdeleteTodo?.data, respdeleteTodo?.loading, respdeleteTodo?.error])
   return (
     <StyledBox
       height={`${props?.height}`}
@@ -209,23 +211,15 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
               style={{ cursor: "pointer" }}
             />
 
-            <Pencil
-              size={20}
-              color="#9a9898"
-              strokeWidth={3}
-              style={{ cursor: "pointer" }}
-            />
-          </Box>
-        )}
-        {props?.stared ? (
-          <Star fill="yellow" color="#2f2e36" onClick={() => Starrded()} />
-        ) : (
-          <Star
-            color="#9a9898"
-            onClick={() => Starrded()}
-            style={{ cursor: "pointer", }}
-          />
-        )}
+            <Pencil size={20} color="#9a9898" strokeWidth={3} style={{ cursor: "pointer" }} onClick={() => {
+              if (typeof props.setCurrentAction === "function")
+                props.setCurrentAction("UPDATE");
+              if (typeof props.setCurrentId === "function")
+                props.setCurrentId(props.id);
+            }} />
+          </Box>)}
+        {props?.stared ? <Star fill='yellow' color='#2f2e36' style={{ cursor: "pointer" }} onClick={() => Starrded()} />
+          : <Star color="#9a9898" style={{ cursor: "pointer" }} onClick={() => Starrded()} />}
       </Box>
     </StyledBox>
   );
