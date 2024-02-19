@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 export async function serverFetch(query:string, variables:any, options:any) {
   try {
     const data = await fetch(
-      `https://a0b8-2405-201-c009-c89d-1936-c054-2b64-5b39.ngrok-free.app/graphql`,
+      `api/graphql`,
       {
         method: "POST",
         headers: {
