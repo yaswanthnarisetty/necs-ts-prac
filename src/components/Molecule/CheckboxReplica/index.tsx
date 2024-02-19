@@ -41,11 +41,11 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
     border-radius: 10px;
     align-items: center;
     text-align: center;
-    background-color: #2f2e36;
+    background-color: #eee;
   `;
   const StyledText = styled(Text)<CheckBoxReplicaProps>`
     font-size: 20px;
-    color: white;
+    color: black;
     text-align: center;
     text-decoration: ${(props: CheckBoxReplicaProps) =>
       props?.completed ? "line-through" : "none"};
@@ -164,7 +164,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Box width="100px">
+      <Box width="50px">
         {props?.completed ? (
           <CheckCircle2
             size={24}
@@ -184,7 +184,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
       <Box
         display="flex"
         flexDirection="row"
-        justifyContent="center"
+        justifyContent="flex-start"
         textAlign="center"
         alignItems="center"
       >
