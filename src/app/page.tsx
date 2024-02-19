@@ -5,7 +5,7 @@ import CheckBoxInput from "@/components/Molecule/CheckBox";
 import InputButton from "@/components/Molecule/InputButton";
 import SideBar from "@/components/Molecule/SideBar";
 import SideBarItem from "@/components/Molecule/SideBarItem";
-import { ClipboardCheck, Star } from 'lucide-react';
+import { ClipboardCheck, Star } from "lucide-react";
 import { FormEvent, ReactElement, useEffect, useState } from "react";
 import { useLazyQuery } from "./hooks";
 import { serverFetch } from "./actions";
@@ -13,13 +13,13 @@ import CheckBoxReplica from "@/components/Molecule/CheckboxReplica";
 export const sideBarItems = [
   {
     name: "All",
-    icon: <ClipboardCheck size={16} color="#000" />
+    icon: <ClipboardCheck size={16} color="#000" />,
   },
   {
     name: "Starred",
-    icon: <Star fill="#000" size={16} color="#000" />
-  }
-]
+    icon: <Star fill="#000" size={16} color="#000" />,
+  },
+];
 export type TodoData = {
   id: string;
   status: string;
@@ -27,40 +27,37 @@ export type TodoData = {
   text: string;
   createdOn?: string;
   updatedOn?: string;
-}
+};
 const datata: TodoData[] = [
   {
     id: "123",
     status: "Completed",
     star: true,
     text: "testing",
-  }, {
+  },
+  {
     id: "1234",
     status: "",
     star: true,
     text: "testing",
-  }
-]
+  },
+];
 export default function Home() {
-  const [selectedpage, setSelectedpage] = useState<string>("ALL")
+  const [selectedpage, setSelectedpage] = useState<string>("ALL");
   const [allTodoData, setAllTodoData] = useState<TodoData[]>([]);
-  const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
-  const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch)
-
+  const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch);
+  const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch);
 
   type sideBarItemProp = {
     name: string;
     icon: ReactElement;
   };
 
-
-
-
   const [todo, setTodo] = useState<string>("");
   const [addTodo, addTodoResponse] = useLazyQuery(serverFetch);
   const [updateTodo, updateTodoResponse] = useLazyQuery(serverFetch);
-  const [currentAction, setCurrentAction] = useState<'ADD' | 'UPDATE'>("ADD");
-  const [currentId, setCurrentId] = useState<string>('');
+  const [currentAction, setCurrentAction] = useState<"ADD" | "UPDATE">("ADD");
+  const [currentId, setCurrentId] = useState<string>("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,7 +66,8 @@ export default function Home() {
       return;
     }
     if (currentAction === "ADD")
-      addTodo(`
+      addTodo(
+        `
       mutation CreateTodo($input: TodoInput!) {
         createTodo(input: $input) {
           id
@@ -81,18 +79,19 @@ export default function Home() {
         }
       }`,
         {
-          "input": {
-            "star": false,
-            "status": "InComplete",
-            "text": todo
-          }
+          input: {
+            star: false,
+            status: "InComplete",
+            text: todo,
+          },
         },
         {
-          cache: "no-store"
+          cache: "no-store",
         }
-      )
+      );
     else
-      updateTodo(`
+      updateTodo(
+        `
         mutation UpdateTodo($input: updateTodoInput!) {
           updateTodo(input: $input) {
             id
@@ -104,50 +103,53 @@ export default function Home() {
           }
         }`,
         {
-          "input": {
+          input: {
             id: currentId,
-            text: todo
-          }
-
+            text: todo,
+          },
         },
         {
-          cache: "no-store"
-        })
+          cache: "no-store",
+        }
+      );
   }
 
   useEffect(() => {
     if (addTodoResponse.data) {
-      setAllTodoData([...allTodoData, addTodoResponse.data?.createTodo])
+      setAllTodoData([...allTodoData, addTodoResponse.data?.createTodo]);
       setTodo("");
     }
-  }, [addTodoResponse.data, addTodoResponse.error])
+  }, [addTodoResponse.data, addTodoResponse.error]);
 
   useEffect(() => {
     if (updateTodoResponse.data) {
-      setAllTodoData(allTodoData?.map((item: TodoData) => {
-        if (item?.id === currentId) {
-          item.text = todo
-
-        }
-        return item;
-      }))
+      setAllTodoData(
+        allTodoData?.map((item: TodoData) => {
+          if (item?.id === currentId) {
+            item.text = todo;
+          }
+          return item;
+        })
+      );
       setTodo("");
-      setCurrentId('');
-      setCurrentAction('ADD');
+      setCurrentId("");
+      setCurrentAction("ADD");
     }
-  }, [updateTodoResponse.data, updateTodoResponse.error])
+  }, [updateTodoResponse.data, updateTodoResponse.error]);
 
   useEffect(() => {
-    if (currentAction === 'UPDATE') {
-      setTodo((allTodoData.find(todo => todo.id === currentId)?.text)!);
-
+    if (currentAction === "UPDATE") {
+      setTodo(allTodoData.find((todo) => todo.id === currentId)?.text!);
     }
-  }, [currentAction, currentId])
+  }, [currentAction, currentId]);
 
   useEffect(() => {
-    const where = selectedpage === "STARRED" ? {
-      "star": true
-    } : {}
+    const where =
+      selectedpage === "STARRED"
+        ? {
+            star: true,
+          }
+        : {};
     console.log(where);
 
     getAllTodos(
@@ -167,26 +169,24 @@ export default function Home() {
       `,
       {
         limit: 20,
-        where
+        where,
       },
       {
-        cache: "no-store"
+        cache: "no-store",
       }
-    )
-  }, [selectedpage])
+    );
+  }, [selectedpage]);
 
   useEffect(() => {
     if (data) {
       console.log(data);
 
-      setAllTodoData(data?.listTodos?.docs)
+      setAllTodoData(data?.listTodos?.docs);
     }
     if (error) {
-      console.log(error, "error")
-
+      console.log(error, "error");
     }
-  }, [data, loading, error])
-
+  }, [data, loading, error]);
 
   return (
     <main>
@@ -203,30 +203,79 @@ export default function Home() {
           }}
         >
           <SideBar title={"Filters"} height={"300px"}>
-            <Box display="flex" justifyContent="flex-start" flexDirection="column" gap="15px" >
-              {sideBarItems.map((item: sideBarItemProp, index: number) => <SideBarItem key={index} active={selectedpage} itemName={item.name} itemIcon={item.icon} setSelectedpage={setSelectedpage} />)}
+            <Box
+              display="flex"
+              justifyContent="flex-start"
+              flexDirection="column"
+              gap="15px"
+            >
+              {sideBarItems.map((item: sideBarItemProp, index: number) => (
+                <SideBarItem
+                  key={index}
+                  active={selectedpage}
+                  itemName={item.name}
+                  itemIcon={item.icon}
+                  setSelectedpage={setSelectedpage}
+                />
+              ))}
             </Box>
           </SideBar>
-          <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
+          <SideBar
+            title={selectedpage == "ALL" ? "Tasks" : "Starred"}
+            height={"300px"}
+          >
             <Box>
-              {selectedpage === "ALL" && <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} currentAction={currentAction} setCurrentAction={setCurrentAction} setCurrentId={setCurrentId} />}
-              {allTodoData?.length > 0 &&
-                <Box display="flex" flexDirection="column" gap="20px" mt="20px" maxHeight="290px" overflowy="auto">
+              {selectedpage === "ALL" && (
+                <InputButton
+                  todo={todo}
+                  setTodo={setTodo}
+                  handleSubmit={handleSubmit}
+                  currentAction={currentAction}
+                  setCurrentAction={setCurrentAction}
+                  setCurrentId={setCurrentId}
+                />
+              )}
+              {allTodoData?.length === 0 ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  gap="20px"
+                  mt="20px"
+                  maxHeight="290px"
+                  overflowy="auto"
+                >
+                  <h4>No Todos Added</h4>
+                </Box>
+              ) : (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  gap="20px"
+                  mt="20px"
+                  maxHeight="290px"
+                  overflowy="auto"
+                >
                   {allTodoData.map((item: TodoData) => {
                     return (
-                      <Box key={item?.id} >
-                        <CheckBoxReplica label={item?.text} allTodoData={allTodoData} setAllTodoData={setAllTodoData}
-                          stared={item?.star} height="40px" id={item?.id}
+                      <Box key={item?.id}>
+                        <CheckBoxReplica
+                          label={item?.text}
+                          allTodoData={allTodoData}
+                          setAllTodoData={setAllTodoData}
+                          stared={item?.star}
+                          height="40px"
+                          id={item?.id}
                           completed={item?.status == "Completed" ? true : false}
                           setCurrentAction={setCurrentAction}
                           setCurrentId={setCurrentId}
-                          status={item?.status} />
+                          status={item?.status}
+                        />
                       </Box>
-                    )
+                    );
                   })}
-                </Box>}
+                </Box>
+              )}
             </Box>
-
           </SideBar>
         </Box>
       </MainLayout>
