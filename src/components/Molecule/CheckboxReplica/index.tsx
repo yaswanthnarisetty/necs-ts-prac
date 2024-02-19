@@ -223,7 +223,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
           <Star
             color="#9a9898"
             onClick={() => Starrded()}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", }}
           />
         )}
       </Box>
