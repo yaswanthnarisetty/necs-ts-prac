@@ -133,25 +133,31 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
     }
   }, [respupdateConfirmed?.data, respupdateConfirmed?.error]);
 
-  function DeleteTodo() {
-    //     deleteTodo(
-    //         `
-    // mutation Mutation($input: deleteTodoInput!) {
-    //     deleteTodo(input: $input) {
-    //       id
-    //       text
-    //       status
-    //       star
-    //       createdOn
-    //       updatedOn
-    //     }
-    //   }`, {
-    //         "input": {
-    //             id:props?.id,
-    //         }
-    //     }
-    //     )
-  }
+          function DeleteTodo() {
+            deleteTodo(
+                `
+                mutation Mutation($deleteTodoId: ID!) {
+                    deleteTodo(id: $deleteTodoId)
+                  }`,{
+                    "deleteTodoId": props?.id
+                  }
+            )
+        // const deletTodo = (id: number) => {
+        //     console.log("hlo");
+        //     const updatedArray: any = props?.allTodoData.filter((item: any) => item.id !== id);
+        //     props?.setAllTodoData(updatedArray);
+        //   };
+
+        }
+        useEffect(()=>{
+            if(respdeleteTodo?.data){
+            const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
+            if (typeof props.setAllTodoData === "function")
+            props?.setAllTodoData(updatedArray);
+
+            }
+
+        },[respdeleteTodo?.data,respdeleteTodo?.loading,respdeleteTodo?.error])
   return (
     <StyledBox
       height={`${props?.height}`}
