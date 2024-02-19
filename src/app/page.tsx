@@ -104,11 +104,11 @@ export default function Home() {
           }
         }`,
         {
-          "input":{
-           id:currentId,
-          text: todo
+          "input": {
+            id: currentId,
+            text: todo
           }
-            
+
         },
         {
           cache: "no-store"
@@ -125,12 +125,12 @@ export default function Home() {
   useEffect(() => {
     if (updateTodoResponse.data) {
       setAllTodoData(allTodoData?.map((item: TodoData) => {
-          if (item?.id === currentId) {
-            item.text = todo
+        if (item?.id === currentId) {
+          item.text = todo
 
-          }
-          return item;
-        }))
+        }
+        return item;
+      }))
       setTodo("");
       setCurrentId('');
       setCurrentAction('ADD');
@@ -140,18 +140,20 @@ export default function Home() {
   useEffect(() => {
     if (currentAction === 'UPDATE') {
       setTodo((allTodoData.find(todo => todo.id === currentId)?.text)!);
-      
+
     }
   }, [currentAction, currentId])
 
   useEffect(() => {
     const where = selectedpage === "STARRED" ? {
-      star: true
+      "star": true
     } : {}
+    console.log(where);
+
     getAllTodos(
       `
-      query ListTodos($limit: Int!) {
-        listTodos(limit: $limit) {
+      query ListTodos($where: whereTodoInput,$limit: Int!) {
+        listTodos(where: $where,limit: $limit) {
           docs {
             id
             text
@@ -172,9 +174,11 @@ export default function Home() {
       }
     )
   }, [selectedpage])
+
   useEffect(() => {
     if (data) {
-      // console.log(data?.listTodos?.docs,"data")
+      console.log(data);
+
       setAllTodoData(data?.listTodos?.docs)
     }
     if (error) {
