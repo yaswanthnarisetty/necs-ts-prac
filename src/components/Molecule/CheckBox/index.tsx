@@ -47,7 +47,7 @@ const Label = styled.label<CustomCheckboxProps>`
 `;
 
 interface StyledCheckboxStyles {
-    possible: boolean;
+  possible: boolean;
 }
 
 const StyledCheckbox = styled.input<StyledCheckboxStyles>`
@@ -77,9 +77,9 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
   const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch)
 
 
-    function Starrded() {
-        updataTodo(
-            `
+  function Starrded() {
+    updataTodo(
+      `
     mutation Mutation($input: updateTodoInput!) {
         updateTodo(input: $input) {
           id
@@ -90,18 +90,19 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
           updatedOn
         }
       }`, {
-            "input": {
-                id,
-                star: !stareed
-            }
-        }
-        )
+      "input": {
+        id,
+        star: !stareed
+      }
     }
-    useEffect(() => {
-        if (data) {
-            setAllTodoData(allTodoData?.map((item: TodoData) => {
-                if (item?.id === id) {
-                    item.star = !stareed
+    )
+  }
+  useEffect(() => {
+    if (data) {
+      if (typeof setAllTodoData === "function")
+        setAllTodoData(allTodoData?.map((item: TodoData) => {
+          if (item?.id === id) {
+            item.star = !stareed
 
                 }
                 return item;
