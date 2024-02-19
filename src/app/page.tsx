@@ -9,6 +9,7 @@ import { ClipboardCheck, Star } from 'lucide-react';
 import { FormEvent, ReactElement, useEffect, useState } from "react";
 import { useLazyQuery } from "./hooks";
 import { serverFetch } from "./actions";
+import CheckBoxReplica from "@/components/Molecule/CheckboxReplica";
 export type TodoData = {
   id: string;
   status: string;
@@ -17,11 +18,23 @@ export type TodoData = {
   createdOn?: string;
   updatedOn?: string;
 }
+const datata:TodoData[]=[
+  {
+  id: "123",
+  status: "Completed",
+  star: true,
+  text: "testing",
+  },{
+    id: "1234",
+  status: "",
+  star: true,
+  text: "testing",
+  }
+]
 export default function Home() {
   const [selectedpage, setSelectedpage] = useState<string>("ALL")
-  const [allTodoData, setAllTodoData] = useState<TodoData[]>([]);
+  const [allTodoData, setAllTodoData] = useState<TodoData[]>(datata);
   const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
-  const [updateConfirmed, respupdateConfirmed ] = useLazyQuery(serverFetch)
 
 
   type sideBarItemProp = {
@@ -119,35 +132,7 @@ export default function Home() {
     }
   }, [data, loading, error])
 
-function updateConfirmedStatus({id,status}:{id:string,status:string}){
-  let UpdateStatus:string
-  if(status=="Completed"){
-    UpdateStatus ="InComplete"
-  }
-  else{
-    UpdateStatus ="Completed"
 
-  }
-  updateConfirmed(
-    `
-    mutation Mutation($input: updateTodoInput!) {
-        updateTodo(input: $input) {
-          id
-          text
-          status
-          star
-          createdOn
-          updatedOn
-        }
-      }`,{
-      input:{
-        id,
-        status:UpdateStatus
-
-      }
-    }
-  )
-}
   return (
     <main>
       <MainLayout>
@@ -169,13 +154,16 @@ function updateConfirmedStatus({id,status}:{id:string,status:string}){
           </SideBar>
           <SideBar title={selectedpage == "ALL" ? "Tasks" : "Starred"} height={"300px"}>
             {selectedpage == "ALL" ? <Box>
+
               <InputButton todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
               {allTodoData?.length > 0 &&
                 <Box display="flex" flexDirection="column" gap="20px">
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} onChange={()=>updateConfirmedStatus({id:item?.id,status:item?.status})}/>
+                      <CheckBoxReplica label={item?.text} allTodoData={allTodoData} setAllTodoData={setAllTodoData} stared={item?.star} height="40px" id={item?.id} completed={item?.status=="Completed"?true:false} status={item?.status}/>
+
+                        {/* <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} status={item?.status} completed={item?.status=="Completed"?true:false}/> */}
 
                       </Box>
                     )

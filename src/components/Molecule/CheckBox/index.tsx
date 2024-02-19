@@ -21,6 +21,8 @@ type CustomCheckboxProps = {
     stareed?: boolean;
     allTodoData?: TodoData[]
     setAllTodoData: Function
+    status?:string
+    // confirmUpdate?:()=>void
 };
 
 const CheckboxContainer = styled.div<CustomCheckboxProps>`
@@ -68,10 +70,12 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
     stareed,
     allTodoData,
     setAllTodoData,
-    onChange }: CustomCheckboxProps) => {
+    onChange ,status}: CustomCheckboxProps) => {
     const inputId = `checkbox-${label.toLowerCase().replace(/\s+/g, '-')}`;
 
     const [updataTodo, { data, loading, error }] = useLazyQuery(serverFetch)
+  const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch)
+
 
     function Starrded() {
         updataTodo(
@@ -104,6 +108,55 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
             }))
         }
     }, [data, error])
+
+    function updateConfirmedStatus(id: string, status: string ) {
+        let UpdateStatus: string
+        if (status == "Completed") {
+          UpdateStatus = "InComplete"
+        }
+        else {
+          UpdateStatus = "Completed"
+    
+        }
+        updateConfirmed(
+          `
+        mutation Mutation($input: updateTodoInput!) {
+            updateTodo(input: $input) {
+              id
+              text
+              status
+              star
+              createdOn
+              updatedOn
+            }
+          }`, {
+          input: {
+            id,
+            status: UpdateStatus
+          }
+        }
+        )
+      }
+      useEffect(() => {
+        let UpdateStatus: string
+        if (status == "Completed") {
+          UpdateStatus = "InComplete"
+        }
+        else {
+          UpdateStatus = "Completed"
+    
+        }
+        if (respupdateConfirmed?.data) {
+            setAllTodoData(allTodoData?.map((item: TodoData) => {
+                if (item?.id === id) {
+                    item.status = UpdateStatus
+
+                }
+                return item;
+            }))
+        }
+    
+      }, [respupdateConfirmed?.data, respupdateConfirmed?.error])
     return (
         <Box>
             <CheckboxContainer
@@ -118,7 +171,7 @@ const CheckBoxInput: React.FC<CustomCheckboxProps> = ({ label,
                         type="checkbox"
                         name={name}
                         onChange={onChange}
-                        disabled={!possible} />
+                        disabled={!possible} onClick={()=>updateConfirmedStatus(id!,status!)}/>
                     <Label htmlFor={inputId} completed={completed} label={''} possible={false}>{label}</Label>
                 </Box>
                 {stareed ? <Star fill='yellow' color='#2f2e36' onClick={() => Starrded()} /> : <Star color="#eef6f5" onClick={() => Starrded()} />
