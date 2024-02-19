@@ -179,7 +179,7 @@ export default function Home() {
                   {allTodoData.map((item: TodoData) => {
                     return (
                       <Box key={item?.id} >
-                        <CheckBoxInput allTodoData={allTodoData} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} onChange={() => updateConfirmedStatus({ id: item?.id, status: item?.status })} />
+                        <CheckBoxInput allTodoData={selectedpage === "ALL" ? allTodoData : allTodoData.filter(item => item.star)} setAllTodoData={setAllTodoData} label={item?.text} possible={true} width="300px" id={item?.id} stareed={item?.star} onChange={() => updateConfirmedStatus({ id: item?.id, status: item?.status })} />
 
                       </Box>
                     )
