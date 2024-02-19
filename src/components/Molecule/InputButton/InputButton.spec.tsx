@@ -4,7 +4,7 @@ import InputButton from "./index";
 
 describe("InputButton Component", () => {
   test("renders without errors", () => {
-    render(<InputButton todo="" setTodo={() => {}} handleSubmit={() => {}} />);
+    render(<InputButton todo="" setTodo={() => { } } handleSubmit={() => { } } setCurrentAction={undefined} setCurrentId={undefined} currentAction={undefined} />);
     expect(screen.getByTestId("input-button-form")).toBeInTheDocument();
   });
 
