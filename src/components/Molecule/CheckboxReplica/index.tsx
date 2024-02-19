@@ -173,6 +173,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
             color="#079c20"
             strokeWidth={3}
             onClick={() => updateConfirmedStatus(props?.id!, props?.status!)}
+            data-testid="completed"
           />
         ) : (
           <Circle
@@ -180,6 +181,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
             color="#9a9898"
             strokeWidth={3}
             onClick={() => updateConfirmedStatus(props?.id!, props?.status!)}
+            data-testid="Incompleted"
           />
         )}
       </Box>
@@ -218,7 +220,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
                 props.setCurrentId(props.id);
             }} />
           </Box>)}
-        {props?.stared ? <Star fill='yellow' color='#2f2e36' style={{ cursor: "pointer" }} onClick={() => Starrded()} />
+        {props?.stared ? <Star fill='yellow' data-testid="filledStar" color='#2f2e36' style={{ cursor: "pointer" }} onClick={() => Starrded()} />
           : <Star color="#9a9898" style={{ cursor: "pointer" }} onClick={() => Starrded()} />}
       </Box>
     </StyledBox>
@@ -226,4 +228,3 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
 }
 
 export default CheckBoxReplica;
-//onClick={() => Starrded()}
