@@ -43,7 +43,7 @@ const datata:TodoData[]=[
 ]
 export default function Home() {
   const [selectedpage, setSelectedpage] = useState<string>("ALL")
-  const [allTodoData, setAllTodoData] = useState<TodoData[]>(datata);
+  const [allTodoData, setAllTodoData] = useState<TodoData[]>([]);
   const [getAllTodos, { data, loading, error }] = useLazyQuery(serverFetch)
   const [updateConfirmed, respupdateConfirmed] = useLazyQuery(serverFetch)
 
