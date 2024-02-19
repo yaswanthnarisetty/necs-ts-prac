@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest",
+    "test": "jest",
     "vtest": "vitest-preview"
   },
   "dependencies": {
@@ -72,5 +72,11 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": ["**/__tests__/**/*.test.ts?(x)"],
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
+  
 }
