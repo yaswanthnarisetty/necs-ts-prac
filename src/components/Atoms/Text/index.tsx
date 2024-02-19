@@ -9,7 +9,6 @@ export type TextProps = {
   fontWeight?: string;
   lineHeight?: string;
   margin?: string;
-  padding?: string;
   mt?: string;
   mr?: string;
   mb?: string;
@@ -18,6 +17,7 @@ export type TextProps = {
   paddingRight?: string;
   paddingBottom?: string;
   paddingLeft?: string;
+  padding?: string;
   fontFamily?: string;
   backgroundcolor?: string;
 };
@@ -28,7 +28,6 @@ const Text = styled.p<TextProps>((props) => ({
   fontWeight: props.fontWeight || "20px",
   lineHeight: props.lineHeight || "2px",
   margin: props.margin || "0",
-  padding: props.padding || "0",
   marginTop: props.mt || "0",
   marginRight: props.mr || "0",
   marginBottom: props.mb || "0",
@@ -37,6 +36,7 @@ const Text = styled.p<TextProps>((props) => ({
   paddingRight: props.paddingRight || "0",
   paddingBottom: props.paddingBottom || "0",
   paddingLeft: props.paddingLeft || "0",
+  padding: props.padding || "0",
   fontFamily: props.fontFamily || "",
   backgroundColor: props.backgroundcolor || ""
 }));

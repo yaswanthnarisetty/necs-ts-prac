@@ -27,6 +27,7 @@ describe("Text Component", () => {
         color="red"
         fontSize="20px"
         fontFamily="Arial, sans-serif"
+        padding="5px"
       >
         Custom Styles Text
       </Text>
