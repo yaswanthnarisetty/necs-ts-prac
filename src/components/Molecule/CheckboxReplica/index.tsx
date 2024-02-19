@@ -149,6 +149,7 @@ function CheckBoxReplica({ ...props }: CheckBoxReplicaProps) {
         useEffect(()=>{
             if(respdeleteTodo?.data){
             const updatedArray: any = props?.allTodoData?.filter((item: any) => item.id !== props?.id);
+            if (typeof props.setAllTodoData === "function")
             props?.setAllTodoData(updatedArray);
 
             }
